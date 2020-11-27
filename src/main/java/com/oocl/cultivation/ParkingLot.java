@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private final int capacity;
+    private int capacity = 10;
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
