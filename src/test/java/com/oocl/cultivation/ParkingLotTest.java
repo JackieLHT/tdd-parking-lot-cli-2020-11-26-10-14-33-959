@@ -9,8 +9,8 @@ public class ParkingLotTest {
 
 
     @Test
-    public void should_car_be_parked_when_park_given_car_and_parking_lot_is_not_full() {
-        ParkingLot parkingLot = new ParkingLot();
+    public void should_return_ticket_when_park_given_car_and_parking_lot_is_not_full() {
+        ParkingLot parkingLot = new ParkingLot(5);
         Car car = new Car();
 
         Ticket ticket = parkingLot.park(car);
