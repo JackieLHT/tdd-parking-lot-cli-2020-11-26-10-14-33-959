@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class ParkingLotTest {
@@ -29,6 +30,19 @@ public class ParkingLotTest {
         Ticket ticket2 = parkingLot.park(car2);
 
         assertNull(ticket2);
+    }
+
+    @Test
+    public void should_only_park_1_car_when_park_given_mutiple_cars_and_parking_lot_has_1_space() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        parkingLot = Mockito.mock(ParkingLot.class);
+        Car car1 = new Car();
+        Car car2 = new Car();
+
+        parkingLot.park(car1);
+        Ticket ticket2 = parkingLot.park(car2);
+
+        verify(parkingLot,times(1)).park(car1);
     }
 
     @Test
