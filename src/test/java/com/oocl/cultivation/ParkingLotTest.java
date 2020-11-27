@@ -45,9 +45,21 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_car_when_fetch_given_fake_ticket() {
+    public void should_return_null_when_fetch_given_fake_ticket() {
         ParkingLot parkingLot = new ParkingLot(5);
         Ticket ticket = new Ticket();
+
+        Car actual = parkingLot.fetch(ticket);
+
+        assertNull(actual);
+    }
+
+    @Test
+    public void should_return_null_when_fetch_given_used_ticket() {
+        ParkingLot parkingLot = new ParkingLot(5);
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        parkingLot.fetch(ticket);
 
         Car actual = parkingLot.fetch(ticket);
 
