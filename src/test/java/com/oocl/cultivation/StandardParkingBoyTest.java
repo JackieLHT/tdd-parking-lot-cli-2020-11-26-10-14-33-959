@@ -13,6 +13,7 @@ class StandardParkingBoyTest {
     public void should_return_ticket_when_park_given_car() throws NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         Car car = new Car();
 
@@ -25,6 +26,7 @@ class StandardParkingBoyTest {
     public void should_return_car_when_fetch_given_ticket() throws UnrecognizedParkingTicketException, NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         Car car = new Car();
 
