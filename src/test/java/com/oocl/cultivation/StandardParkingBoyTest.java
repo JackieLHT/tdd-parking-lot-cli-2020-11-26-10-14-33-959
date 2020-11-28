@@ -50,4 +50,23 @@ class StandardParkingBoyTest {
 
         assertSame(car, parkingLot1.fetch(ticket));
     }
+
+    @Test
+    public void should_park_car_in_second_parkinglot_when_park_given_car_and_first_is_full_and_other_parkinglot_is_not_full() throws UnrecognizedParkingTicketException, NotEnoughPositionException {
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(10);
+        ParkingLot parkingLot3 = new ParkingLot(10);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        parkingLots.add(parkingLot3);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        Car car1 = new Car();
+        Car car2 = new Car();
+
+        standardParkingBoy.park(car1);
+        Ticket ticket = standardParkingBoy.park(car2);
+
+        assertSame(car2, parkingLot2.fetch(ticket));
+    }
 }
