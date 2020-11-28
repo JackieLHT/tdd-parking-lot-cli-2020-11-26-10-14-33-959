@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class SmartParkingBoy extends StandardParkingBoy {
+public class SmartParkingBoy extends ParkingBoy {
     public SmartParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
@@ -19,7 +19,9 @@ public class SmartParkingBoy extends StandardParkingBoy {
     }
 
     private ParkingLot getParkingLotWithMostEmptyPositions() {
-        super.parkingLots.sort((parkinglot1, parkinglot2) -> parkinglot2.getAvailableSpace() - parkinglot1.getAvailableSpace());
+        if(super.parkingLots.size() > 1) {
+            super.parkingLots.sort((parkinglot1, parkinglot2) -> parkinglot2.getAvailableSpace() - parkinglot1.getAvailableSpace());
+        }
         return super.parkingLots.get(0);
     }
 }

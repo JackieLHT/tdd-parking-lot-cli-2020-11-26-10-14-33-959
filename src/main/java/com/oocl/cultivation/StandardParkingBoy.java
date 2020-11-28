@@ -2,11 +2,10 @@ package com.oocl.cultivation;
 
 import java.util.List;
 
-public class StandardParkingBoy {
-    protected List<ParkingLot> parkingLots;
+public class StandardParkingBoy extends ParkingBoy{
 
     public StandardParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
     public Ticket park(Car car) throws NotEnoughPositionException {
@@ -16,15 +15,5 @@ public class StandardParkingBoy {
             }
         }
         throw new NotEnoughPositionException();
-    }
-
-    public Car fetch(Ticket ticket) throws UnrecognizedParkingTicketException {
-        for(ParkingLot parkinglot:parkingLots) {
-            if(parkinglot.isContainCar(ticket))
-            {
-                return parkinglot.fetch(ticket);
-            }
-        }
-        throw new UnrecognizedParkingTicketException();
     }
 }
