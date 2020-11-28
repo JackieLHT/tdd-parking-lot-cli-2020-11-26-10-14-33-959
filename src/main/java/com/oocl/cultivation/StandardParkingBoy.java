@@ -1,9 +1,9 @@
 package com.oocl.cultivation;
 
-public class ParkingBoy {
+public class StandardParkingBoy {
     private ParkingLot parkingLot;
 
-    public ParkingBoy(ParkingLot parkingLot) {
+    public StandardParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
     }
 

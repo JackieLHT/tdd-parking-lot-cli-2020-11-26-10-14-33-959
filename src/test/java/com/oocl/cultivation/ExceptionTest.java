@@ -8,11 +8,34 @@ public class ExceptionTest {
     @Test
     public void should_throw_UnrecognizedParkingTicketException_when_fetch_given_fake_ticket() throws UnrecognizedParkingTicketException {
         ParkingLot parkinglot = new ParkingLot(10);
-        ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkinglot);
         Ticket ticket = new Ticket();
 
         assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingBoy.fetch(ticket);
+            parkinglot.fetch(ticket);
+        }, "Unrecognized parking ticket");
+
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            standardParkingBoy.fetch(ticket);
+        }, "Unrecognized parking ticket");
+
+    }
+
+    @Test
+    public void should_throw_UnrecognizedParkingTicketException_when_fetch_given_used_ticket() throws UnrecognizedParkingTicketException,NotEnoughPositionException {
+        ParkingLot parkinglot = new ParkingLot(10);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkinglot);
+        Car car = new Car();
+
+        Ticket ticket = standardParkingBoy.park(car);
+        standardParkingBoy.fetch(ticket);
+
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            parkinglot.fetch(ticket);
+        }, "Unrecognized parking ticket");
+
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            standardParkingBoy.fetch(ticket);
         }, "Unrecognized parking ticket");
 
     }
@@ -20,14 +43,18 @@ public class ExceptionTest {
     @Test
     public void should_throw_NotEnoughPositionException_when_park_given_a_car_and_parkinglot_is_full() throws NotEnoughPositionException {
         ParkingLot parkinglot = new ParkingLot(1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkinglot);
         Car car1 = new Car();
         Car car2 = new Car();
 
         parkinglot.park(car1);
 
         assertThrows(NotEnoughPositionException.class, () -> {
-            parkingBoy.park(car2);
+            parkinglot.park(car2);
+        }, "Not enough position.");
+
+        assertThrows(NotEnoughPositionException.class, () -> {
+            standardParkingBoy.park(car2);
         }, "Not enough position.");
 
     }
