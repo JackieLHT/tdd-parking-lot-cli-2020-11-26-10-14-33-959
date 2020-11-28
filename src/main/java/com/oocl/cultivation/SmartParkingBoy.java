@@ -1,7 +1,5 @@
 package com.oocl.cultivation;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class SmartParkingBoy extends ParkingBoy {
@@ -12,7 +10,7 @@ public class SmartParkingBoy extends ParkingBoy {
     @Override
     public Ticket park(Car car) throws NotEnoughPositionException {
         ParkingLot parkingLotWithMostSpaces = getParkingLotWithMostEmptyPositions();
-        if (parkingLotWithMostSpaces.getAvailableSpace() != 0) {
+        if (parkingLotWithMostSpaces.getAvailableSpaceNumber() != 0) {
             return parkingLotWithMostSpaces.park(car);
         }
         throw new NotEnoughPositionException();
@@ -20,7 +18,7 @@ public class SmartParkingBoy extends ParkingBoy {
 
     private ParkingLot getParkingLotWithMostEmptyPositions() {
         if(super.parkingLots.size() > 1) {
-            super.parkingLots.sort((parkinglot1, parkinglot2) -> parkinglot2.getAvailableSpace() - parkinglot1.getAvailableSpace());
+            super.parkingLots.sort((parkinglot1, parkinglot2) -> parkinglot2.getAvailableSpaceNumber() - parkinglot1.getAvailableSpaceNumber());
         }
         return super.parkingLots.get(0);
     }

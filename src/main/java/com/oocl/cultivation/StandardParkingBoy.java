@@ -10,7 +10,7 @@ public class StandardParkingBoy extends ParkingBoy{
 
     public Ticket park(Car car) throws NotEnoughPositionException {
         for(ParkingLot parkinglot: parkingLots) {
-            if(parkinglot.getAvailableSpace() > 0) {
+            if(parkinglot.getAvailableSpaceNumber() > 0) {
                return parkinglot.park(car);
             }
         }
