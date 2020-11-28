@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class ManagerTest {
     @Test
-    public void should_park_the_car_in_first_parking_lot_when_park_given_a_car_and_multiple_parkinglots_with_spaces() throws NotEnoughPositionException,UnrecognizedParkingTicketException{
+    public void should_park_and_fetch_the_car_in_first_parking_lot_when_park_given_a_car_and_multiple_parkinglots_with_spaces() throws NotEnoughPositionException,UnrecognizedParkingTicketException{
         ParkingLot parkingLot1 = new ParkingLot(10);
         ParkingLot parkingLot2 = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
@@ -23,4 +23,6 @@ public class ManagerTest {
 
         assertSame(car, parkingLot1.fetch(ticket));
     }
+
+
 }

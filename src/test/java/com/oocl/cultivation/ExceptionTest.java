@@ -46,6 +46,7 @@ public class ExceptionTest {
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        Manager manager = new Manager(parkingLots);
         Car car = new Car();
 
         Ticket ticket = standardParkingBoy.park(car);
@@ -68,6 +69,10 @@ public class ExceptionTest {
             superSmartParkingBoy.fetch(ticket);
         }, "Unrecognized parking ticket.");
 
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            manager.fetch(ticket);
+        }, "Unrecognized parking ticket.");
+
     }
 
     @Test
@@ -80,6 +85,7 @@ public class ExceptionTest {
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        Manager manager = new Manager(parkingLots);
         Car car1 = new Car();
         Car car2 = new Car();
         Car car3 = new Car();
@@ -101,6 +107,10 @@ public class ExceptionTest {
 
         assertThrows(NotEnoughPositionException.class, () -> {
             superSmartParkingBoy.park(car3);
+        }, "Not enough position.");
+
+        assertThrows(NotEnoughPositionException.class, () -> {
+            manager.park(car3);
         }, "Not enough position.");
 
     }
