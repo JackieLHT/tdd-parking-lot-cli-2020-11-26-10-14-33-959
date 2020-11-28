@@ -18,7 +18,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_car_when_park_given_ticket() {
+    void should_return_car_when_park_given_ticket() throws UnrecognizedParkingTicketException {
         ParkingLot parkingLot = new ParkingLot(10);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
