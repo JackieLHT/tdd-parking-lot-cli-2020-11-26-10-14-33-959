@@ -33,33 +33,35 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_only_park_1_car_when_park_given_mutiple_cars_and_parking_lot_has_1_space() {
+    public void should_return_only_1_ticket_when_park_given_mutiple_cars_and_parking_lot_has_1_space() {
         ParkingLot parkingLot = new ParkingLot(1);
-        parkingLot = Mockito.mock(ParkingLot.class);
         Car car1 = new Car();
         Car car2 = new Car();
 
-        parkingLot.park(car1);
+        Ticket ticket1 = parkingLot.park(car1);
         Ticket ticket2 = parkingLot.park(car2);
 
-        verify(parkingLot,times(1)).park(car1);
+        assertNotNull(ticket1);
+        assertNull(ticket2);
     }
 
     @Test
     public void should_park_all_cars_when_park_given_mutiple_cars_and_parking_lot_has_enough_spaces() {
         ParkingLot parkingLot = new ParkingLot(5);
-        parkingLot = Mockito.mock(ParkingLot.class);
         Car car1 = new Car();
         Car car2 = new Car();
         Car car3 = new Car();
         Car car4 = new Car();
 
-        parkingLot.park(car1);
-        parkingLot.park(car2);
-        parkingLot.park(car3);
-        parkingLot.park(car4);
+        Ticket ticket1 = parkingLot.park(car1);
+        Ticket ticket2 = parkingLot.park(car2);
+        Ticket ticket3 = parkingLot.park(car3);
+        Ticket ticket4 = parkingLot.park(car4);
 
-        verify(parkingLot,times(4)).park(car1);
+        assertNotNull(ticket1);
+        assertNotNull(ticket2);
+        assertNotNull(ticket3);
+        assertNotNull(ticket4);
     }
 
     @Test
