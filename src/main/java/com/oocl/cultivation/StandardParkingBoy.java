@@ -1,9 +1,11 @@
 package com.oocl.cultivation;
 
-public class StandardParkingBoy {
-    private ParkingLot parkingLot;
+import java.util.List;
 
-    public StandardParkingBoy(ParkingLot parkingLot) {
+public class StandardParkingBoy {
+    private List<ParkingLot> parkingLot;
+
+    public StandardParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLot = parkingLot;
     }
 
