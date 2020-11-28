@@ -125,13 +125,14 @@ public class ExceptionTest {
         parkingLotList2.add(parkinglot2);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList1);
         Manager manager = new Manager(parkingLotList2);
+        manager.addParkingBoyToList(standardParkingBoy);
         Car car1 = new Car();
         Car car2 = new Car();
 
         parkinglot1.park(car1);
 
         assertThrows(NotEnoughPositionException.class, () -> {
-            manager.assignPark(standardParkingBoy,car2)
+            manager.assignPark(standardParkingBoy,car2);
         }, "Not enough position.");
 
     }
@@ -146,15 +147,17 @@ public class ExceptionTest {
         parkingLotList2.add(parkinglot2);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList1);
         Manager manager = new Manager(parkingLotList2);
+        manager.addParkingBoyToList(standardParkingBoy);
         Car car1 = new Car();
         Ticket ticket1 = new Ticket();
         Ticket ticket2 = parkinglot1.park(car1);
+        manager.assignFetch(standardParkingBoy,ticket2);
 
-        assertThrows(NotEnoughPositionException.class, () -> {
-            manager.assignFetch(standardParkingBoy,ticket1)
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            manager.assignFetch(standardParkingBoy,ticket1);
         }, "Unrecognized parking ticket.");
 
-        assertThrows(NotEnoughPositionException.class, () -> {
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
             manager.assignFetch(standardParkingBoy,ticket2);
         }, "Unrecognized parking ticket.");
 

@@ -20,4 +20,10 @@ public class Manager extends StandardParkingBoy{
         managementList.add(parkingBoy);
     }
 
+    public Car assignFetch(ParkingBoy parkingBoy, Ticket ticket) throws UnrecognizedParkingTicketException {
+        if(managementList.contains(parkingBoy)) {
+            return parkingBoy.fetch(ticket);
+        }
+        return null;
+    }
 }
