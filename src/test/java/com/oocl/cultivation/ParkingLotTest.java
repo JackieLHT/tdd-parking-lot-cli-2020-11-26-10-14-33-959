@@ -46,6 +46,23 @@ public class ParkingLotTest {
     }
 
     @Test
+    public void should_park_all_cars_when_park_given_mutiple_cars_and_parking_lot_has_enough_spaces() {
+        ParkingLot parkingLot = new ParkingLot(5);
+        parkingLot = Mockito.mock(ParkingLot.class);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
+        Car car4 = new Car();
+
+        parkingLot.park(car1);
+        parkingLot.park(car2);
+        parkingLot.park(car3);
+        parkingLot.park(car4);
+
+        verify(parkingLot,times(4)).park(car1);
+    }
+
+    @Test
     public void should_return_car_when_fetch_given_correct_ticket_and_car_in_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(5);
         Car car = new Car();
