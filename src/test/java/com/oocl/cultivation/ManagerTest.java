@@ -24,5 +24,26 @@ public class ManagerTest {
         assertSame(car, parkingLot1.fetch(ticket));
     }
 
+    @Test
+    public void should_specific_parking_boy_park_the_car_when_assignPark_given_a_car_and_a_parking_boy() throws UnrecognizedParkingTicketException,NotEnoughPositionException{
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot3 = new ParkingLot();
+        ParkingLot parkingLot4 = new ParkingLot();
+        List<ParkingLot> parkingLotList1 = new ArrayList<>();
+        List<ParkingLot> parkingLotList2 = new ArrayList<>();
+        List<ParkingLot> parkingLotList3 = new ArrayList<>();
+        List<ParkingLot> parkingLotList4 = new ArrayList<>();
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList1);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotList2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList3);
+        Manager manager = new Manager(parkingLotList4);
+        Car car = new Car();
+
+        Ticket ticket = manager.assignPark(smartParkingBoy,car);
+
+        assertSame(car, parkingLot2.fetch(ticket));
+    }
+
 
 }
