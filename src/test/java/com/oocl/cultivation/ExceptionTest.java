@@ -14,6 +14,8 @@ public class ExceptionTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkinglot);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         Ticket ticket = new Ticket();
 
         assertThrows(UnrecognizedParkingTicketException.class, () -> {
@@ -24,6 +26,16 @@ public class ExceptionTest {
             standardParkingBoy.fetch(ticket);
         }, "Unrecognized parking ticket.");
 
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            smartParkingBoy.fetch(ticket);
+        }, "Unrecognized parking ticket.");
+
+
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            superSmartParkingBoy.fetch(ticket);
+        }, "Unrecognized parking ticket.");
+
+
     }
 
     @Test
@@ -32,6 +44,8 @@ public class ExceptionTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkinglot);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         Car car = new Car();
 
         Ticket ticket = standardParkingBoy.park(car);
@@ -45,6 +59,15 @@ public class ExceptionTest {
             standardParkingBoy.fetch(ticket);
         }, "Unrecognized parking ticket.");
 
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            smartParkingBoy.fetch(ticket);
+        }, "Unrecognized parking ticket.");
+
+
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            superSmartParkingBoy.fetch(ticket);
+        }, "Unrecognized parking ticket.");
+
     }
 
     @Test
@@ -56,6 +79,7 @@ public class ExceptionTest {
         parkingLots.add(parkinglot1);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         Car car1 = new Car();
         Car car2 = new Car();
         Car car3 = new Car();
@@ -73,6 +97,10 @@ public class ExceptionTest {
 
         assertThrows(NotEnoughPositionException.class, () -> {
             smartParkingBoy.park(car3);
+        }, "Not enough position.");
+
+        assertThrows(NotEnoughPositionException.class, () -> {
+            superSmartParkingBoy.park(car3);
         }, "Not enough position.");
 
     }
