@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 public class ParkingLotTest {
 
     @Test
-    public void should_return_ticket_when_park_given_car_and_parking_lot_is_not_full() {
+    public void should_return_ticket_when_park_given_car_and_parking_lot_is_not_full() throws NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(5);
         Car car = new Car();
 
@@ -21,32 +21,35 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_not_return_ticket_when_park_given_car_and_parking_lot_is_full() {
+    public void should_throw_NotEnoughPositionException_when_park_given_car_and_parking_lot_is_full() throws NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(1);
         Car car1 = new Car();
         Car car2 = new Car();
 
         parkingLot.park(car1);
-        Ticket ticket2 = parkingLot.park(car2);
 
-        assertNull(ticket2);
+        assertThrows(NotEnoughPositionException.class, () -> {
+            parkingLot.park(car2);
+        }, "Not enough position.");
     }
 
     @Test
-    public void should_return_only_1_ticket_when_park_given_mutiple_cars_and_parking_lot_has_1_space() {
+    public void should_return_only_1_ticket_and_throw_NotEnoughPositionException_when_park_given_mutiple_cars_and_parking_lot_has_1_space() throws NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(1);
         Car car1 = new Car();
         Car car2 = new Car();
 
         Ticket ticket1 = parkingLot.park(car1);
-        Ticket ticket2 = parkingLot.park(car2);
+
 
         assertNotNull(ticket1);
-        assertNull(ticket2);
+        assertThrows(NotEnoughPositionException.class, () -> {
+            parkingLot.park(car2);
+        }, "Not enough position.");
     }
 
     @Test
-    public void should_park_all_cars_when_park_given_mutiple_cars_and_parking_lot_has_enough_spaces() {
+    public void should_park_all_cars_when_park_given_mutiple_cars_and_parking_lot_has_enough_spaces() throws NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(5);
         Car car1 = new Car();
         Car car2 = new Car();
@@ -65,7 +68,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_car_when_fetch_given_correct_ticket_and_car_in_parking_lot() throws UnrecognizedParkingTicketException {
+    public void should_return_car_when_fetch_given_correct_ticket_and_car_in_parking_lot() throws UnrecognizedParkingTicketException, NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(5);
         Car car = new Car();
 
@@ -74,7 +77,7 @@ public class ParkingLotTest {
 
         Car actual = parkingLot.fetch(ticket);
 
-        assertEquals(car,actual);
+        assertEquals(car, actual);
     }
 
     @Test
@@ -82,21 +85,21 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(5);
         Ticket ticket = new Ticket();
 
-        assertThrows(UnrecognizedParkingTicketException.class,()->{
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
             parkingLot.fetch(ticket);
-        },"Unrecognized parking ticket.");
+        }, "Unrecognized parking ticket.");
     }
 
     @Test
-    public void should_throw_UnrecognizedParkingTicketException_when_fetch_given_used_ticket() throws UnrecognizedParkingTicketException {
+    public void should_throw_UnrecognizedParkingTicketException_when_fetch_given_used_ticket() throws UnrecognizedParkingTicketException, NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(5);
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
         parkingLot.fetch(ticket);
 
-        assertThrows(UnrecognizedParkingTicketException.class,()->{
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
             parkingLot.fetch(ticket);
-        },"Unrecognized parking ticket.");
+        }, "Unrecognized parking ticket.");
     }
 
 

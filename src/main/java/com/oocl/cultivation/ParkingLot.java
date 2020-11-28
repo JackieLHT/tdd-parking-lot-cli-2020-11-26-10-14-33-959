@@ -11,13 +11,14 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    public Ticket park(Car car) {
+    public Ticket park(Car car) throws NotEnoughPositionException {
         if (ticketCarMap.size() < capacity) {
             Ticket newTicket = new Ticket();
             ticketCarMap.put(newTicket, car);
             return newTicket;
+        } else {
+            throw new NotEnoughPositionException();
         }
-        return null;
     }
 
     public Car fetch(Ticket ticket) throws UnrecognizedParkingTicketException {

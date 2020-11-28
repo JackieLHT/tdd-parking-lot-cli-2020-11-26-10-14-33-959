@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ExceptionTest {
@@ -10,9 +11,9 @@ public class ExceptionTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkinglot);
         Ticket ticket = new Ticket();
 
-        assertThrows(UnrecognizedParkingTicketException.class,()->{
+        assertThrows(UnrecognizedParkingTicketException.class, () -> {
             parkingBoy.fetch(ticket);
-        },"Unrecognized parking ticket");
+        }, "Unrecognized parking ticket");
 
     }
 
@@ -25,9 +26,9 @@ public class ExceptionTest {
 
         parkinglot.park(car1);
 
-        assertThrows(UnrecognizedParkingTicketException.class,()->{
+        assertThrows(NotEnoughPositionException.class, () -> {
             parkingBoy.park(car2);
-        },"Not enough position.");
+        }, "Not enough position.");
 
     }
 

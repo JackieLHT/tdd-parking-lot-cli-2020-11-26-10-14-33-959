@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyTest {
     @Test
-    void should_return_ticket_when_park_given_car() {
+    void should_return_ticket_when_park_given_car() throws NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(10);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
@@ -18,7 +18,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_car_when_park_given_ticket() throws UnrecognizedParkingTicketException {
+    void should_return_car_when_park_given_ticket() throws UnrecognizedParkingTicketException, NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(10);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
@@ -26,6 +26,6 @@ class ParkingBoyTest {
         Ticket ticket = parkingBoy.park(car);
         Car actual = parkingBoy.fetch(ticket);
 
-        assertEquals(car,actual);
+        assertEquals(car, actual);
     }
 }
