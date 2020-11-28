@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class SmartParkingBoyTest {
     @Test
-    public void shoud_park_car_in_parkinglot_with_most_empty_positions_when_park_given_a_car_and_multiple_parking_lots_with_empty_spaces() {
+    public void shoud_park_car_in_parkinglot_with_most_empty_positions_when_park_given_a_car_and_multiple_parking_lots_with_empty_spaces() throws  NotEnoughPositionException, UnrecognizedParkingTicketException{
         ParkingLot parkingLot1 = new ParkingLot(5);
         ParkingLot parkingLot2 = new ParkingLot(10);
         ParkingLot parkingLot3 = new ParkingLot(20);
