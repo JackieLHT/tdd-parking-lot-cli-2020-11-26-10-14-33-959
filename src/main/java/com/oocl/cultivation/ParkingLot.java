@@ -39,4 +39,8 @@ public class ParkingLot {
     public boolean isContainCar(Ticket ticket) {
         return ticketCarMap.containsKey(ticket);
     }
+
+    public float getAvailablePositionRate() {
+        return getAvailableSpace() / capacity;
+    }
 }
