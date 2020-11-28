@@ -52,5 +52,23 @@ public class ManagerTest {
         assertSame(car, parkingLot2.fetch(ticket));
     }
 
+    @Test
+    public void should_only_park_and_fetch_in_own_parkinglot_when_given_a_car_or_a_ticket() throws UnrecognizedParkingTicketException,NotEnoughPositionException{
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLotList1 = new ArrayList<>();
+        List<ParkingLot> parkingLotList2 = new ArrayList<>();
+        parkingLotList1.add(parkingLot1);
+        parkingLotList2.add(parkingLot2);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList1);
+        Manager manager = new Manager(parkingLotList2);
+        manager.addParkingBoyToList(standardParkingBoy);
+        Car car = new Car();
+
+        Ticket ticket = manager.park(car);
+
+        assertSame(car, parkingLot2.fetch(ticket));
+    }
+
 
 }

@@ -10,8 +10,14 @@ public class Manager extends StandardParkingBoy{
     }
 
     public Ticket assignPark(ParkingBoy parkingBoy, Car car) throws NotEnoughPositionException {
-        return parkingBoy.park(car);
+        if(managementList.contains(parkingBoy)) {
+            return parkingBoy.park(car);
+        }
+        return null;
     }
 
+    public void addParkingBoyToList(ParkingBoy parkingBoy) {
+        managementList.add(parkingBoy);
+    }
 
 }
