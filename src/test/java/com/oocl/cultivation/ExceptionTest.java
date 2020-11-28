@@ -48,22 +48,31 @@ public class ExceptionTest {
     }
 
     @Test
-    public void should_throw_NotEnoughPositionException_when_park_given_a_car_and_parkinglot_is_full() throws NotEnoughPositionException {
-        ParkingLot parkinglot = new ParkingLot(1);
+    public void should_throw_NotEnoughPositionException_when_park_given_a_car_and_all_parkinglots_are_full() throws NotEnoughPositionException {
+        ParkingLot parkinglot1 = new ParkingLot(1);
+        ParkingLot parkinglot2 = new ParkingLot(1);
         List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(parkinglot);
+        parkingLots.add(parkinglot1);
+        parkingLots.add(parkinglot1);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLots);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
         Car car1 = new Car();
         Car car2 = new Car();
+        Car car3 = new Car();
 
-        parkinglot.park(car1);
+        parkinglot1.park(car1);
+        parkinglot2.park(car2);
 
         assertThrows(NotEnoughPositionException.class, () -> {
-            parkinglot.park(car2);
+            parkinglot1.park(car3);
         }, "Not enough position.");
 
         assertThrows(NotEnoughPositionException.class, () -> {
-            standardParkingBoy.park(car2);
+            standardParkingBoy.park(car3);
+        }, "Not enough position.");
+
+        assertThrows(NotEnoughPositionException.class, () -> {
+            smartParkingBoy.park(car3);
         }, "Not enough position.");
 
     }
